@@ -2,14 +2,17 @@ import socket
 import struct
 from network import LoRa 
 import time
+import machine
+import binascii
 
 # MQTT
 
 from mqtt import MQTTClient
 from iotmiddleware import IotConnection
 
-connect = IotConnection("pycom1",'192.168.0.15')
-
+connect = IotConnection("pycom1",'198.199.68.64')
+unique_id = binascii.hexlify(machine.unique_id())
+print(unique_id)
 _LORA_PKG_FORMAT = "!BBB%ds"
 
 _LORA_PKG_ACK_FORMAT = "BBBB"
