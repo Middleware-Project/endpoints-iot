@@ -11,7 +11,7 @@ from SI7006A20 import SI7006A20
 unique_id = binascii.hexlify(machine.unique_id())
 py = Pysense()
 si = SI7006A20(py)
-connect = IotConnection(str(unique_id),'198.199.68.64')
+connect = IotConnection(str(unique_id),'mosquitto.middlewareiot.me')
 topic_temperature = "backend/1/1/measures/sensors/temperature"
 topic_humidity = "backend/1/1/measures/sensors/humidity"
 
