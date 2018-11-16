@@ -44,16 +44,26 @@ s.setsockopt(socket.SOL_LORA, socket.SO_DR, config.LORA_NODE_DR)
 # make the socket blocking
 s.setblocking(False)
 
+# update node information
+
 for i in range (200):
     pkt = b'PKT #' + bytes([i])
     value = "%.2f" % (si.temperature())
     data = {
+        "sensor":"temperature",
         "value":value
     }
 
-    # data = str(data)
+    #data = str(data)
     data = ujson.dumps(data)
     print('Sending:', data)
+    s.send(data)
+    time.sleep(10)
+    data = {
+        "value":"update"
+    }
+    data = ujson.dumps(data)
+    print('Sending Update:',data)
     s.send(data)
     time.sleep(10)
     rx, port = s.recvfrom(256)
